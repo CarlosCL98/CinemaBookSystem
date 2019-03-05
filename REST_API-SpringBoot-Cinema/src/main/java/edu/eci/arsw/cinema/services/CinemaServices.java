@@ -33,8 +33,12 @@ public class CinemaServices {
 	@Autowired
 	private Filter filtro;
 
-	public void addNewCinema(Cinema c) throws CinemaPersistenceException {
-		cps.saveCinema(c);
+	public void addNewCinema(Cinema c) throws CinemaException {
+		try {
+			cps.saveCinema(c);
+		} catch (CinemaPersistenceException e) {
+			throw new CinemaException(e.getMessage(), e);
+		}
 	}
 
 	public Map<String, Cinema> getAllCinemas() {
@@ -50,20 +54,40 @@ public class CinemaServices {
 		return cinemas;
 	}
 
-	public Cinema getCinemaByName(String name) throws CinemaPersistenceException {
-		return cps.getCinemaByName(name);
+	public Cinema getCinemaByName(String name) throws CinemaException {
+		try {
+			return cps.getCinemaByName(name);
+		} catch (CinemaPersistenceException e) {
+			throw new CinemaException(e.getMessage(), e);
+		}
 	}
 
 	public void buyTicket(int row, int col, String cinema, String date, String movieName) throws CinemaException {
 		cps.buyTicket(row, col, cinema, date, movieName);
 	}
 
-	public List<CinemaFunction> getFunctionsbyCinemaAndDate(String cinema, String date) {
-		return cps.getFunctionsbyCinemaAndDate(cinema, date);
+	public List<CinemaFunction> getFunctionsbyCinemaAndDate(String cinema, String date) throws CinemaException {
+		try {
+			return cps.getFunctionsbyCinemaAndDate(cinema, date);
+		} catch (CinemaPersistenceException e) {
+			throw new CinemaException(e.getMessage(), e);
+		}
+	}
+	
+	public CinemaFunction getFunctionbyCinemaDateAndMovie(String cinema, String date, String movie) throws CinemaException {
+		try {
+			return cps.getFunctionbyCinemaDateAndMovie(cinema, date, movie);
+		} catch (CinemaPersistenceException e) {
+			throw new CinemaException(e.getMessage(), e);
+		}
 	}
 
-	public List<Movie> getFilmsFilter(String cinema, String date, String filter) throws CinemaPersistenceException {
-		return filtro.filterBy(getCinemaByName(cinema), date, filter);
+	public List<Movie> getFilmsFilter(String cinema, String date, String filter) throws CinemaException {
+		try {
+			return filtro.filterBy(getCinemaByName(cinema), date, filter);
+		} catch (CinemaPersistenceException e) {
+			throw new CinemaException(e.getMessage(), e);
+		}
 	}
 
 }

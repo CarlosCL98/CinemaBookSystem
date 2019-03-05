@@ -23,6 +23,7 @@ public class CinemaFunction {
     private String date;
 
     public CinemaFunction() {
+    	
     }
 
     public CinemaFunction(Movie movie, String date) {

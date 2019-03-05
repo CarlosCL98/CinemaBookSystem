@@ -1,6 +1,6 @@
 package edu.eci.arsw.cinema.test;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
+//import com.sun.javafx.scene.control.skin.VirtualFlow;
 import edu.eci.arsw.cinema.filter.AvailabilityFilter;
 import edu.eci.arsw.cinema.filter.GenreFilter;
 import edu.eci.arsw.cinema.model.Cinema;

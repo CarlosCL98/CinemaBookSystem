@@ -27,67 +27,67 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CinemaServices {
 
-	@Autowired
-	CinemaPersitence cps;
+    @Autowired
+    CinemaPersitence cps;
 
-	@Autowired
-	private Filter filtro;
+    @Autowired
+    private Filter filtro;
 
-	public void addNewCinema(Cinema c) throws CinemaException {
-		try {
-			cps.saveCinema(c);
-		} catch (CinemaPersistenceException e) {
-			throw new CinemaException(e.getMessage(), e);
-		}
-	}
+    public void addNewCinema(Cinema c) throws CinemaException {
+        try {
+            cps.saveCinema(c);
+        } catch (CinemaPersistenceException e) {
+            throw new CinemaException(e.getMessage(), e);
+        }
+    }
 
-	public Map<String, Cinema> getAllCinemas() {
-		return cps.getCinemas();
-	}
+    public Map<String, Cinema> getAllCinemas() {
+        return cps.getCinemas();
+    }
 
-	public List<Cinema> getAllCinemasList() {
-		Map<String, Cinema> cinemasM = getAllCinemas();
-		List<Cinema> cinemas = new ArrayList<>();
-		for (String key : cinemasM.keySet()) {
-			cinemas.add(cinemasM.get(key));
-		}
-		return cinemas;
-	}
+    public List<Cinema> getAllCinemasList() {
+        Map<String, Cinema> cinemasM = getAllCinemas();
+        List<Cinema> cinemas = new ArrayList<>();
+        for (String key : cinemasM.keySet()) {
+            cinemas.add(cinemasM.get(key));
+        }
+        return cinemas;
+    }
 
-	public Cinema getCinemaByName(String name) throws CinemaException {
-		try {
-			return cps.getCinemaByName(name);
-		} catch (CinemaPersistenceException e) {
-			throw new CinemaException(e.getMessage(), e);
-		}
-	}
+    public Cinema getCinemaByName(String name) throws CinemaException {
+        try {
+            return cps.getCinemaByName(name);
+        } catch (CinemaPersistenceException e) {
+            throw new CinemaException(e.getMessage(), e);
+        }
+    }
 
-	public void buyTicket(int row, int col, String cinema, String date, String movieName) throws CinemaException {
-		cps.buyTicket(row, col, cinema, date, movieName);
-	}
+    public void buyTicket(int row, int col, String cinema, String date, String movieName) throws CinemaException {
+        cps.buyTicket(row, col, cinema, date, movieName);
+    }
 
-	public List<CinemaFunction> getFunctionsbyCinemaAndDate(String cinema, String date) throws CinemaException {
-		try {
-			return cps.getFunctionsbyCinemaAndDate(cinema, date);
-		} catch (CinemaPersistenceException e) {
-			throw new CinemaException(e.getMessage(), e);
-		}
-	}
-	
-	public CinemaFunction getFunctionbyCinemaDateAndMovie(String cinema, String date, String movie) throws CinemaException {
-		try {
-			return cps.getFunctionbyCinemaDateAndMovie(cinema, date, movie);
-		} catch (CinemaPersistenceException e) {
-			throw new CinemaException(e.getMessage(), e);
-		}
-	}
+    public List<CinemaFunction> getFunctionsbyCinemaAndDate(String cinema, String date) throws CinemaException {
+        try {
+            return cps.getFunctionsbyCinemaAndDate(cinema, date);
+        } catch (CinemaPersistenceException e) {
+            throw new CinemaException(e.getMessage(), e);
+        }
+    }
 
-	public List<Movie> getFilmsFilter(String cinema, String date, String filter) throws CinemaException {
-		try {
-			return filtro.filterBy(getCinemaByName(cinema), date, filter);
-		} catch (CinemaPersistenceException e) {
-			throw new CinemaException(e.getMessage(), e);
-		}
-	}
+    public CinemaFunction getFunctionbyCinemaDateAndMovie(String cinema, String date, String movie) throws CinemaException {
+        try {
+            return cps.getFunctionbyCinemaDateAndMovie(cinema, date, movie);
+        } catch (CinemaPersistenceException e) {
+            throw new CinemaException(e.getMessage(), e);
+        }
+    }
+
+    public List<Movie> getFilmsFilter(String cinema, String date, String filter) throws CinemaException {
+        try {
+            return filtro.filterBy(getCinemaByName(cinema), date, filter);
+        } catch (CinemaPersistenceException e) {
+            throw new CinemaException(e.getMessage(), e);
+        }
+    }
 
 }

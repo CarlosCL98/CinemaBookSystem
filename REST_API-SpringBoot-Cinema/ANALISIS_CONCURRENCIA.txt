@@ -1,0 +1,11 @@
+Análisis de Concurrecia:
+
+- ¿Qué condiciones de carrera se podrían presentar?
+  Rta: las condiciones de carrera que se pueden presentar son en el momento en que se esté agregando, modificando o consultando un recurso al mismo tiempo que dos o más clientes también lo están haciendo, pues puede generar recursos corruptos,  consultas con datos desactualizados o inciertos, que sólo una modificación de las realizadas sea exitosa, entre otros casos.
+
+- ¿Cuales son las respectivas regiones críticas?
+  Rta: todos los métodos que tienen acceso a los recursos compartidos, en este caso los cinemas y sus respectivas funciones.
+
+Solución propuesta:
+
+- Como la lista de los cines es una de las variables principales, porque la clase Cinema contiene a las demás clases, la convertimos en una variable atómica para que así no existan inconvenientes al momento de recibir múltiples peticiones de la misma. Para solucionar el problema que se puede presentar al consultar un recurso cuando alguien más esta añadiendo algo o modificándolo, se usó el modificador "volatile" con el fin de actualizar la "vista" de la variable a todos los observadores de manera inmediata al ser alterado por un hilo.

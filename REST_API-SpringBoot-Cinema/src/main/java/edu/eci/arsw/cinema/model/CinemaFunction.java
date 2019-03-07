@@ -19,7 +19,6 @@ public class CinemaFunction {
 
     private Movie movie;
     private List<List<Boolean>> seats = new ArrayList<>();
-    
     private String date;
 
     public CinemaFunction() {
